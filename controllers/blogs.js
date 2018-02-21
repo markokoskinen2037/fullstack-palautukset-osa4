@@ -10,6 +10,12 @@ blogsRouter.get('/', (request, response) => {
 })
 
 blogsRouter.post('/', (request, response) => {
+
+    if(request.body.likes === undefined){
+        request.body.likes = 0
+    }
+
+
     const blog = new Blog(request.body)
 
     blog
