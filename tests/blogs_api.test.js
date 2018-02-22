@@ -63,6 +63,16 @@ describe("POST tests", () => {
         expect(likesarray[likesarray.length-1]).toBe(0)
     })
 
+    test("if blog-title and url are empty then return 400 bad request", async () => {
+        const newBlog = {
+            likes: 2
+        }
+
+        await api
+            .post("/api/blogs")
+            .send(newBlog)
+            .expect(400)
+    })
 
 
 

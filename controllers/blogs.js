@@ -15,6 +15,10 @@ blogsRouter.post('/', (request, response) => {
         request.body.likes = 0
     }
 
+    if(request.body.url === undefined && request.body.title === undefined){
+        return response.status(400).json({ error: 'title and url missing' })
+    }
+
 
     const blog = new Blog(request.body)
 
