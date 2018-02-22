@@ -155,6 +155,11 @@ describe("apufunktiotestit ", () => {
         console.log(listHelper.mostBlogs(blogs))
     })
 
+    test("mostLikes()", () => {
+
+        console.log(listHelper.mostLikes(blogs))
+    })
+
 
 
 
