@@ -60,16 +60,16 @@ describe("POST tests", () => {
             .expect(201)
             .expect('Content-Type', /application\/json/)
 
-            const blogsAfterOperation = await blogsInDb()
+        const blogsAfterOperation = await blogsInDb()
 
 
-            expect(blogsAfterOperation.length).toBe(startBlogs.length + 1)
+        expect(blogsAfterOperation.length).toBe(startBlogs.length + 1)
 
     })
 
     test("if likes is empty then its set to 0", async () => {
-        
-        
+
+
         const newBlog = {
             title: "test",
             author: "tester",
@@ -84,9 +84,9 @@ describe("POST tests", () => {
 
         const blogs = await blogsInDb()
 
-        console.log(blogs[blogs.length-1])
+        console.log(blogs[blogs.length - 1])
 
-        expect(blogs[blogs.length-1].likes).toBe(0)
+        expect(blogs[blogs.length - 1].likes).toBe(0)
     })
 
     test("if blog-title and url are empty then return 400 bad request", async () => {
@@ -101,6 +101,36 @@ describe("POST tests", () => {
     })
 
 
+
+
+})
+
+describe('deletion of a blog', async () => {
+
+    let addedBlog
+
+    beforeAll(async () => {
+        addedBlog = new Blog({
+            title: "test yeah 123",
+            author: "peter pan 72"
+        })
+        await addedBlog.save()
+    })
+
+    test('DELETE /api/blogs/:id succeeds with proper statuscode', async () => {
+        const blogsAtStart = await blogsInDb()
+
+        await api
+            .delete(`/api/blogs/${addedBlog._id}`)
+            .expect(204)
+
+        const blogsAfterOperation = await blogsInDb()
+
+        const contents = blogsAfterOperation.map(r => r.title)
+
+        expect(contents).not.toContain(addedBlog.content)
+        expect(blogsAfterOperation.length).toBe(blogsAtStart.length - 1)
+    })
 
 })
 
