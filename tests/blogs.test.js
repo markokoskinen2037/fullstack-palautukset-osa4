@@ -90,7 +90,7 @@ describe('total likes', () => {
 
 })
 
-describe("favouriteBlog ", () => {
+describe("apufunktiotestit ", () => {
 
         const blogs = [
         {
@@ -143,11 +143,16 @@ describe("favouriteBlog ", () => {
         }
     ]
 
-    test("of large list is correct", () => {
+    test("favouriteBlog()", () => {
 
         const best_id = listHelper.favoriteBlog(blogs)._id
 
         expect(best_id).toBe("5a422b3a1b54a676234d17f9")
+    })
+
+    test("mostBlogs()", () => {
+
+        console.log(listHelper.mostBlogs(blogs))
     })
 
 

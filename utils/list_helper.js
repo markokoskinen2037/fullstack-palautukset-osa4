@@ -19,7 +19,7 @@ const favoriteBlog = (blogs) => {
   let max = 0;
   let bestBlog = null;
   blogs.forEach(blog => {
-    if(blog.likes >= max){
+    if (blog.likes >= max) {
       max = blog.likes;
       bestBlog = blog;
     }
@@ -28,8 +28,40 @@ const favoriteBlog = (blogs) => {
 
 }
 
+const mostBlogs = (blogs) => {
+
+
+  let currentBestAuthor = ""
+  let currentBestScore = 0
+  let tempCounter = 0
+  
+  blogs.forEach(blog => {
+    let currentAuthor = blog.author
+    blogs.forEach(blog => { //Käydään blogit läpi ja lasketaan jokaiselle authorille score erikseen
+      if(blog.author === currentAuthor){
+        tempCounter++
+      }
+    })
+    if(tempCounter >= currentBestScore){
+      currentBestScore = tempCounter
+      currentBestAuthor = currentAuthor
+      tempCounter = 0
+    }
+  });
+
+  results = {
+    author: currentBestAuthor,
+    blogs: currentBestScore
+  }
+
+  return results
+
+
+}
+
 module.exports = {
   dummy,
   totalLikes,
-  favoriteBlog
+  favoriteBlog,
+  mostBlogs
 }
