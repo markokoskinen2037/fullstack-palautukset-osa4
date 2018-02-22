@@ -11,11 +11,11 @@ blogsRouter.get('/', (request, response) => {
 
 blogsRouter.post('/', (request, response) => {
 
-    if(request.body.likes === undefined){
+    if (request.body.likes === undefined) {
         request.body.likes = 0
     }
 
-    if(request.body.url === undefined && request.body.title === undefined){
+    if (request.body.url === undefined && request.body.title === undefined) {
         return response.status(400).json({ error: 'title and url missing' })
     }
 
@@ -31,14 +31,32 @@ blogsRouter.post('/', (request, response) => {
 
 blogsRouter.delete('/:id', (request, response) => {
     Blog
-      .findByIdAndRemove(request.params.id)
-      .then(result => {
-        console.log(result)
-        response.status(204).end()
-      })
-      .catch(error => {
-        response.status(400).send({ error: 'malformatted id' })
-      })
-  })
+        .findByIdAndRemove(request.params.id)
+        .then(result => {
+            console.log(result)
+            response.status(204).end()
+        })
+        .catch(error => {
+            response.status(400).send({ error: 'malformatted id' })
+        })
+})
+
+blogsRouter.put('/api/blogs/:id', (request, response) => {
+    const body = request.body
+
+    const blog = {
+        likes: body.likes
+    }
+
+    Blog
+        .findByIdAndUpdate(request.params.id, blog, { new: true })
+        .then(updatedBlog => {
+            response.json(updatedBlog)
+        })
+        .catch(error => {
+            console.log(error)
+            response.status(400).send({ error: 'malformatted id' })
+        })
+})
 
 module.exports = blogsRouter
