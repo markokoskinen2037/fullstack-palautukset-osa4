@@ -33,7 +33,6 @@ blogsRouter.delete('/:id', (request, response) => {
     Blog
         .findByIdAndRemove(request.params.id)
         .then(result => {
-            console.log(result)
             response.status(204).end()
         })
         .catch(error => {

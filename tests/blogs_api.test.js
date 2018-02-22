@@ -84,7 +84,6 @@ describe("POST tests", () => {
 
         const blogs = await blogsInDb()
 
-        console.log(blogs[blogs.length - 1])
 
         expect(blogs[blogs.length - 1].likes).toBe(0)
     })

@@ -73,7 +73,6 @@ const mostLikes = (blogs) => {
     blogs.forEach(blog => { //Käydään blogit läpi ja lasketaan jokaiselle authorille score erikseen
       if (blog.author === currentAuthor) {
         tempCounter = tempCounter + blog.likes
-        console.log(tempCounter)
       }
     })
     if (tempCounter >= bestLikes) {

@@ -92,7 +92,7 @@ describe('total likes', () => {
 
 describe("apufunktiotestit ", () => {
 
-        const blogs = [
+    const blogs = [
         {
             _id: "5a422a851b54a676234d17f7",
             title: "React patterns",
@@ -143,21 +143,23 @@ describe("apufunktiotestit ", () => {
         }
     ]
 
-    test("favouriteBlog()", () => {
+    test("favouriteBlog() works", () => {
 
         const best_id = listHelper.favoriteBlog(blogs)._id
 
         expect(best_id).toBe("5a422b3a1b54a676234d17f9")
     })
 
-    test("mostBlogs()", () => {
+    test("mostBlogs() works", () => {
 
-        console.log(listHelper.mostBlogs(blogs))
+
+        expect(listHelper.mostBlogs(blogs)).toEqual({ "author": "Robert C. Martin", "blogs": 3 })
     })
 
-    test("mostLikes()", () => {
+    test("mostLikes() works", () => {
 
-        console.log(listHelper.mostLikes(blogs))
+
+        expect(listHelper.mostLikes(blogs)).toEqual({ author: 'Edsger W. Dijkstra', likes: 17 })
     })
 
 
