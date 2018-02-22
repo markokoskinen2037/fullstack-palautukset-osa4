@@ -34,19 +34,20 @@ const mostBlogs = (blogs) => {
   let currentBestAuthor = ""
   let currentBestScore = 0
   let tempCounter = 0
-  
+
   blogs.forEach(blog => {
     let currentAuthor = blog.author
     blogs.forEach(blog => { //Käydään blogit läpi ja lasketaan jokaiselle authorille score erikseen
-      if(blog.author === currentAuthor){
+      if (blog.author === currentAuthor) {
         tempCounter++
       }
     })
-    if(tempCounter >= currentBestScore){
+    if (tempCounter >= currentBestScore) {
       currentBestScore = tempCounter
       currentBestAuthor = currentAuthor
-      tempCounter = 0
+
     }
+    tempCounter = 0
   });
 
   results = {
@@ -65,19 +66,22 @@ const mostLikes = (blogs) => {
   let bestAuthor = ""
   let bestLikes = 0
   let tempCounter = 0
-  
+
   blogs.forEach(blog => {
     let currentAuthor = blog.author
+
     blogs.forEach(blog => { //Käydään blogit läpi ja lasketaan jokaiselle authorille score erikseen
-      if(blog.author === currentAuthor){
+      if (blog.author === currentAuthor) {
         tempCounter = tempCounter + blog.likes
+        console.log(tempCounter)
       }
     })
-    if(tempCounter >= bestLikes){
+    if (tempCounter >= bestLikes) {
       bestLikes = tempCounter
       bestAuthor = currentAuthor
-      tempCounter = 0
+
     }
+    tempCounter = 0
   });
 
   results = {
