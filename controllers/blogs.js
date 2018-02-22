@@ -41,12 +41,13 @@ blogsRouter.delete('/:id', (request, response) => {
         })
 })
 
-blogsRouter.put('/api/blogs/:id', (request, response) => {
+blogsRouter.put('/:id', (request, response) => {
     const body = request.body
 
     const blog = {
         likes: body.likes
     }
+ 
 
     Blog
         .findByIdAndUpdate(request.params.id, blog, { new: true })
