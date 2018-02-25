@@ -1,12 +1,15 @@
 const User = require('../models/user')
 const { format, initialNotes, nonExistingId, notesInDb, usersInDb } = require('./test_helper')
 
-//...
+const supertest = require('supertest')
+const { app, server } = require('../index')
+const api = supertest(app)
+
 
 describe('when there is initially one user at db', async () => {
   beforeAll(async () => {
     await User.remove({})
-    const user = new User({ username: 'root', password: 'sekret' })
+    const user = new User({ username: 'root', of_age:false, name: "test", password: 'sekret' })
     await user.save()
   })
 
@@ -51,4 +54,8 @@ describe('when there is initially one user at db', async () => {
     const usersAfterOperation = await usersInDb()
     expect(usersAfterOperation.length).toBe(usersBeforeOperation.length)
   })
+})
+
+afterAll(() => {
+    server.close()
 })

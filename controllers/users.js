@@ -25,6 +25,14 @@ usersRouter.post('/', async (request, response) => {
         if(body.of_age === undefined){
             body.of_age = true
         }
+        
+        if(body.password.length < 3){
+            return response.status(400).json({ error: 'password must be atleast 3 characters' })
+        }
+
+        if(body.username === undefined || body.name === undefined){
+            return response.status(400).json({ error: 'please enter username and name separately' })
+        }
 
         const saltRounds = 10
         const passwordHash = await bcrypt.hash(body.password, saltRounds)
