@@ -3,16 +3,6 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 
 
-const formatUser = (user) => {
-    return {
-        id: user.id,
-        username: user.username,
-        name: user.name,
-        of_age: user.of_age,
-        blogs: user.blogs
-    }
-}
-
 usersRouter.post('/', async (request, response) => {
     try {
         const body = request.body
@@ -56,8 +46,11 @@ usersRouter.post('/', async (request, response) => {
 
 
 usersRouter.get('/', async (request, response) => {
-    const users = await User.find({})
-    response.json(users.map(formatUser))
+    const users = await User
+    .find({})
+    .populate('blogs', {title: 1, url: 1})
+
+  response.json(users.map(User.format))
 })
 
 module.exports = usersRouter
